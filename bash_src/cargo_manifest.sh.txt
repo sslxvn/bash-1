@@ -1,17 +1,14 @@
 #!/bin/bash
 
-# Определяем массивы с грузами
 forward_bay=("Space Suits" "Oxygen Tanks" "Repair Kits")
 midship_bay=("Food Supplies" "Water Containers" "Medical Equipment")
 aft_bay=("Spare Parts" "Fuel Cells" "Scientific Instruments")
 
-# Проверяем, был ли передан аргумент
 if [ -z "$1" ]; then
     echo "Please specify a cargo bay: forward, midship, or aft"
     exit 1
 fi
 
-# В зависимости от аргумента выводим соответствующий инвентарь
 case $1 in
     forward)
         echo "Forward Bay Inventory:"
@@ -36,3 +33,4 @@ case $1 in
         exit 1
         ;;
 esac
+
