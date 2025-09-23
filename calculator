@@ -1,1 +1,53 @@
+#!/bin/bash
 
+# Кольори
+PINK='\033[1;35m'     # рожевий/фіолетовий
+PURPLE='\033[0;35m'   # фіолетовий
+BLUE='\033[1;36m'     # блакитний
+WHITE='\033[1;37m'    # білий (для виділення)
+GREEN='\033[1;32m'    # зелений (для результату)
+RESET='\033[0m'       # скидання кольору
+
+# Заголовок
+echo -e "${PURPLE}         КАЛЬКУЛЯТОР${RESET}"
+
+# Ввід чисел
+echo -ne "${BLUE}Введіть перше число:${RESET} "
+read n1
+echo -ne "${BLUE}Введіть друге число:${RESET} "
+read n2
+
+i="т"
+
+while [ "$i" = "т" ]
+do
+    echo
+    echo -e "${PINK}1.${RESET} Додавання"
+    echo -e "${PINK}2.${RESET} Віднімання"
+    echo -e "${PINK}3.${RESET} Множення"
+    echo -e "${PINK}4.${RESET} Ділення"
+    echo -ne "${BLUE}Оберіть дію [1-4]:${RESET} "
+    read ch
+
+    case $ch in
+        1) res=$(echo "$n1 + $n2" | bc -l)
+           echo -e "${GREEN}$n1 + $n2 = $res${RESET}" ;;
+        2) res=$(echo "$n1 - $n2" | bc -l)
+           echo -e "${GREEN}$n1 - $n2 = $res${RESET}" ;;
+        3) res=$(echo "$n1 * $n2" | bc -l)
+           echo -e "${GREEN}$n1 * $n2 = $res${RESET}" ;;
+        4) if [ "$n2" = "0" ]; then
+               echo -e "${PURPLE}Помилка: ділення на нуль!${RESET}"
+           else
+               res=$(echo "$n1 / $n2" | bc -l)
+               echo -e "${GREEN}$n1 / $n2 = $res${RESET}"
+           fi ;;
+        *) echo -e "${PURPLE}Невірний вибір!${RESET}" ;;
+    esac
+
+    echo
+    echo -ne "${BLUE}Бажаєте продовжити? (т/н):${RESET} "
+    read i
+done
+
+echo -e "${PINK}Дякуємо за використання калькулятора${RESET}"
